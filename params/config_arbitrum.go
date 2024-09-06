@@ -141,7 +141,7 @@ func ArbitrumDevTestEigenDAParams() ArbitrumChainParams {
 		AllowDebugPrecompiles:     true,
 		DataAvailabilityCommittee: false,
 		EigenDA:                   true,
-		InitialArbOSVersion:       20,
+		InitialArbOSVersion:       31,
 		InitialChainOwner:         common.Address{},
 	}
 }
