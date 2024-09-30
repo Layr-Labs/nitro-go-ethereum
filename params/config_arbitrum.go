@@ -31,6 +31,7 @@ type ArbitrumChainParams struct {
 	EnableArbOS               bool
 	AllowDebugPrecompiles     bool
 	DataAvailabilityCommittee bool
+	EigenDA                   bool
 	InitialArbOSVersion       uint64
 	InitialChainOwner         common.Address
 	GenesisBlockNum           uint64
@@ -85,6 +86,7 @@ func ArbitrumOneParams() ArbitrumChainParams {
 		EnableArbOS:               true,
 		AllowDebugPrecompiles:     false,
 		DataAvailabilityCommittee: false,
+		EigenDA:                   false,
 		InitialArbOSVersion:       6,
 		InitialChainOwner:         common.HexToAddress("0xd345e41ae2cb00311956aa7109fc801ae8c81a52"),
 	}
@@ -95,6 +97,7 @@ func ArbitrumNovaParams() ArbitrumChainParams {
 		EnableArbOS:               true,
 		AllowDebugPrecompiles:     false,
 		DataAvailabilityCommittee: true,
+		EigenDA:                   false,
 		InitialArbOSVersion:       1,
 		InitialChainOwner:         common.HexToAddress("0x9C040726F2A657226Ed95712245DeE84b650A1b5"),
 	}
@@ -105,6 +108,7 @@ func ArbitrumRollupGoerliTestnetParams() ArbitrumChainParams {
 		EnableArbOS:               true,
 		AllowDebugPrecompiles:     false,
 		DataAvailabilityCommittee: false,
+		EigenDA:                   false,
 		InitialArbOSVersion:       2,
 		InitialChainOwner:         common.HexToAddress("0x186B56023d42B2B4E7616589a5C62EEf5FCa21DD"),
 	}
@@ -116,6 +120,7 @@ func ArbitrumDevTestParams() ArbitrumChainParams {
 		AllowDebugPrecompiles:     true,
 		DataAvailabilityCommittee: false,
 		InitialArbOSVersion:       32,
+		EigenDA: 				 false,
 		InitialChainOwner:         common.Address{},
 	}
 }
@@ -126,6 +131,18 @@ func ArbitrumDevTestDASParams() ArbitrumChainParams {
 		AllowDebugPrecompiles:     true,
 		DataAvailabilityCommittee: true,
 		InitialArbOSVersion:       32,
+		EigenDA:                   false,
+		InitialChainOwner:         common.Address{},
+	}
+}
+
+func ArbitrumDevTestEigenDAParams() ArbitrumChainParams {
+	return ArbitrumChainParams{
+		EnableArbOS:               true,
+		AllowDebugPrecompiles:     true,
+		DataAvailabilityCommittee: false,
+		InitialArbOSVersion:       32,
+		EigenDA:                   true,
 		InitialChainOwner:         common.Address{},
 	}
 }
@@ -135,6 +152,7 @@ func ArbitrumAnytrustGoerliTestnetParams() ArbitrumChainParams {
 		EnableArbOS:               true,
 		AllowDebugPrecompiles:     false,
 		DataAvailabilityCommittee: true,
+		EigenDA: 				 false,
 		InitialArbOSVersion:       2,
 		InitialChainOwner:         common.HexToAddress("0x186B56023d42B2B4E7616589a5C62EEf5FCa21DD"),
 	}
@@ -270,6 +288,30 @@ func ArbitrumDevTestDASChainConfig() *ChainConfig {
 	}
 }
 
+func ArbitrumDevTestEigenDAConfig() *ChainConfig {
+	return &ChainConfig{
+		ChainID:             big.NewInt(412346),
+		HomesteadBlock:      big.NewInt(0),
+		DAOForkBlock:        nil,
+		DAOForkSupport:      true,
+		EIP150Block:         big.NewInt(0),
+		EIP155Block:         big.NewInt(0),
+		EIP158Block:         big.NewInt(0),
+		ByzantiumBlock:      big.NewInt(0),
+		ConstantinopleBlock: big.NewInt(0),
+		PetersburgBlock:     big.NewInt(0),
+		IstanbulBlock:       big.NewInt(0),
+		MuirGlacierBlock:    big.NewInt(0),
+		BerlinBlock:         big.NewInt(0),
+		LondonBlock:         big.NewInt(0),
+		ArbitrumChainParams: ArbitrumDevTestEigenDAParams(),
+		Clique: &CliqueConfig{
+			Period: 0,
+			Epoch:  0,
+		},
+	}
+}
+
 func ArbitrumAnytrustGoerliTestnetChainConfig() *ChainConfig {
 	return &ChainConfig{
 		ChainID:             big.NewInt(421703),
@@ -301,4 +343,5 @@ var ArbitrumSupportedChainConfigs = []*ChainConfig{
 	ArbitrumDevTestChainConfig(),
 	ArbitrumDevTestDASChainConfig(),
 	ArbitrumAnytrustGoerliTestnetChainConfig(),
+	ArbitrumDevTestEigenDAConfig(),
 }
