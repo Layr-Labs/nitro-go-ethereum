@@ -120,7 +120,7 @@ func ArbitrumDevTestParams() ArbitrumChainParams {
 		AllowDebugPrecompiles:     true,
 		DataAvailabilityCommittee: false,
 		InitialArbOSVersion:       32,
-		EigenDA: 				 false,
+		EigenDA:                   false,
 		InitialChainOwner:         common.Address{},
 	}
 }
@@ -152,7 +152,7 @@ func ArbitrumAnytrustGoerliTestnetParams() ArbitrumChainParams {
 		EnableArbOS:               true,
 		AllowDebugPrecompiles:     false,
 		DataAvailabilityCommittee: true,
-		EigenDA: 				 false,
+		EigenDA:                   false,
 		InitialArbOSVersion:       2,
 		InitialChainOwner:         common.HexToAddress("0x186B56023d42B2B4E7616589a5C62EEf5FCa21DD"),
 	}
