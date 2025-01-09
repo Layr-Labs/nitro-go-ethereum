@@ -1,0 +1,29 @@
+title: "layr-labs/go-ethereum"  # Define the HTML page title
+logo: "logo.png"
+footer: |  # define the footer with markdown
+  [nitro-go-ethereum](https://github.com/Layr-Labs/go-ethereum) fork overview &middot created with [Forkdiff](https://github.com/protolambda/forkdiff)
+base:
+  name: OffchainLabs/go-ethereum
+  url: https://github.com/OffchainLabs/go-ethereum
+  hash: 17cd00167543a5a2b0b083e32820051100154c2f
+fork:
+  name: Layr-Labs/nitro-go-ethereum
+  url: https://github.com/Layr-Labs/go-ethereum
+  ref: refs/heads/eigenda
+def:
+    title: "Nitro Go Ethereum Fork Overview"
+    description: | # description in markdown
+      The original nitro go-ethereum codebase can be found at [`github.com/OffchainLabs/go-ethereum`](https://github.com/OffchainLabs/go-ethereum).
+      And the fork at [`github.com/Layr-Labs/nitro-go-ethereum`](https://github.com/Layr-Labs/nitro-go-ethereum).
+
+    sub:
+      - title: "Config Changes"
+        description: |
+          Updated core Arbitrum Chain Param configs to populate EigenDA boolean feature flag.
+          Also added testing configs specific to EigenDA.
+      
+        globs:
+          - params/config_arbitrum.go
+
+ignore:
+  - "*.sum"
