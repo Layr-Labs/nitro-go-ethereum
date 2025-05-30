@@ -376,7 +376,7 @@ func (es *EventSystem) handleLogs(filters filterIndex, ev []*types.Log) {
 		return
 	}
 	for _, f := range filters[LogsSubscription] {
-		matchedLogs := filterLogs(ev, f.logsCrit.FromBlock, f.logsCrit.ToBlock, f.logsCrit.Addresses, f.logsCrit.Topics)
+		matchedLogs := FilterLogs(ev, f.logsCrit.FromBlock, f.logsCrit.ToBlock, f.logsCrit.Addresses, f.logsCrit.Topics)
 		if len(matchedLogs) > 0 {
 			f.logs <- matchedLogs
 		}
@@ -391,7 +391,7 @@ func (es *EventSystem) handleTxsEvent(filters filterIndex, ev core.NewTxsEvent) 
 
 func (es *EventSystem) handleChainEvent(filters filterIndex, ev core.ChainEvent) {
 	for _, f := range filters[BlocksSubscription] {
-		f.headers <- ev.Block.Header()
+		f.headers <- ev.Header
 	}
 }
 

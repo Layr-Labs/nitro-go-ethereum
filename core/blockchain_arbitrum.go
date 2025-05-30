@@ -19,6 +19,7 @@ package core
 
 import (
 	"fmt"
+	"math/rand/v2"
 	"time"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -28,6 +29,13 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/rpc"
 )
+
+func (bc *BlockChain) generateGcprocRandOffset() time.Duration {
+	if bc.cacheConfig.TrieTimeLimitRandomOffset > 0 {
+		return time.Duration(rand.Int64N(int64(bc.cacheConfig.TrieTimeLimitRandomOffset)))
+	}
+	return 0
+}
 
 func (bc *BlockChain) FlushTrieDB(capLimit common.StorageSize) error {
 	if bc.triedb.Scheme() == rawdb.PathScheme {
@@ -53,6 +61,7 @@ func (bc *BlockChain) FlushTrieDB(capLimit common.StorageSize) error {
 			}
 
 			bc.gcproc = 0
+			bc.gcprocRandOffset = bc.generateGcprocRandOffset()
 			bc.lastWrite = blockNumber
 		}
 	}
@@ -104,6 +113,6 @@ func (bc *BlockChain) RecoverState(block *types.Block) error {
 		return nil
 	}
 	log.Warn("recovering block state", "num", block.Number(), "hash", block.Hash(), "root", block.Root())
-	_, err := bc.recoverAncestors(block)
+	_, err := bc.recoverAncestors(block, false)
 	return err
 }
